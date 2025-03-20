@@ -1,0 +1,35 @@
+version: "3.4"
+name: cities
+services:
+  db:
+    image: mariadb:11.3.2
+    container_name: cities-db-dev
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_PORT: 3306,
+      MYSQL_ROOT_PASSWORD: 'rootpassword'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: [ CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - network1
+  backend:
+    image: cities
+    container_name: cities-api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db:
+          condition: service_healthy
+    networks:
+      - network1
+  # TODO Añadir el frontend
+networks:
+  network1:
+    driver: bridge
+  
