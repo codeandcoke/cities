@@ -1,7 +1,7 @@
 db:
   host: localhost
   port: 3306
-  user: userprod
+  user: user
   password: password
   database: cities
 
