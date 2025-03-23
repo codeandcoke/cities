@@ -3,7 +3,7 @@ const express = require('express');
 const cities = require('./route/cities');
 const { config } = require('./config/configuration');
 const promClient = require('prom-client');
-const { httpRequestDurationSeconds, httpRequestsTotal, inFlightRequests } = require('./config/metrics'); // Use direct imports
+const { httpRequestDurationSeconds, httpRequestsTotal, inFlightRequests } = require('./config/metrics');
 
 const app = express();
 app.use(express.json());
@@ -41,6 +41,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// Define el endpoint que usará prometheus para recoger las métricas
 app.get('/metrics', async(req, res) => {
     try {
         res.set('Content-Type', promClient.register.contentType);
