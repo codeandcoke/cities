@@ -43,7 +43,7 @@ describe('cities', () => {
                 })
                 .end((error, response) => {
                     response.should.have.status(201);
-                    //expect(response.body).to.have.property('id');
+                    expect(response.body).to.have.property('id');
                     expect(response.body).to.have.property('name');
                     expect(response.body).to.have.property('population');
                     expect(response.body).to.have.property('altitude');
