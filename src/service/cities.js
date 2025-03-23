@@ -36,9 +36,9 @@ const cityExists = (async (name) => {
 const registerCity = (async (name, population, altitude, foundationDate, area) => {
     const age = getYearsFromNow(new Date(foundationDate));
     const density = getDensity(population, area);
+    let cityId;
 
     const returning = await db('cities')
-        .returning("id")    // TODO Revisar cómo funciona para MariaDB
         .insert({
             name: name,
             population: population,
@@ -47,10 +47,12 @@ const registerCity = (async (name, population, altitude, foundationDate, area) =
             age: age,
             area: area,
             density: density
+        }).then( async (ids) => {
+            cityId = ids[0];
         });
 
     const result = {
-        id: returning[0].id,
+        id: cityId,
         age: age,
         density: density
     };
