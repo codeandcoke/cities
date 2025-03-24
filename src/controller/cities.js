@@ -1,4 +1,4 @@
-const { findCities, registerCity, modifyCity, removeCity } = require("../service/cities");
+const { findCities, findCity, registerCity, modifyCity, removeCity } = require("../service/cities");
 
 const getCities = (async (req, res) => {
     const cityList = await findCities();
@@ -12,7 +12,17 @@ const getCities = (async (req, res) => {
 });
 
 const getCity = (async (req, res) => {
-    const city = await findCity(req.params.city);
+    const cityId = parseInt(req.params.cityId);
+
+    if (!Number.isInteger(cityId)) {
+        res.status(400).json({
+            status: 'bad-request',
+            message: 'cityId is not a valid number'
+        });
+        return;
+    }
+
+    const city = await findCity(cityId);
 
     if (city === undefined) {
         res.status(404).json({
@@ -67,16 +77,50 @@ const postCity = (async (req, res) => {
 });
 
 const putCity = (async (req, res) => {
-    await modifyCity(req.params.name, req.body.population, req.body.altitude);
+    const cityId = parseInt(req.params.cityId);
+    
+    if (!Number.isInteger(cityId)) {
+        res.status(400).json({
+            status: 'bad-request',
+            message: 'cityId is not a valid number'
+        });
+        return;
+    }
+
+    const modified = await modifyCity(cityId, req.body.name, req.body.population, req.body.altitude);
+
+    if (!modified) {
+        res.status(404).json({
+            status: 'not-found',
+            message: 'city not found'
+        });
+        return;
+    }
 
     res.status(204).json({});
 });
 
 const deleteCity = (async (req, res) => {
-    // TODO Validaciones y comprobaciones
-    await removeCity(req.params.name);
-    
-    res.status(204).json({})
+    const cityId = parseInt(req.params.cityId);
+
+    if (!Number.isInteger(cityId)) {
+        res.status(400).json({
+            status: 'bad-request',
+            message: 'cityId is not a valid number'
+        });
+        return;
+    }
+
+    const removed = await removeCity(cityId);
+    if (!removed) {
+        res.status(404).json({
+            status: 'not-found',
+            message: 'city not found'
+        });
+        return;
+    }
+
+    res.status(204).json({});
 });
 
 module.exports = {

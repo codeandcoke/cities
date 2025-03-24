@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { getDensity} = require('../../utils');
+const { getDensity} = require('../../utils/cityUtils');
 
 describe('utils', () => {
     it('getDensity', () => {
