@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const { getDaysFromNow, getDays} = require('../../dateUtils');
+const { getDaysFromNow, getDays} = require('../../utils/dateUtils');
 
 beforeAll(() => {
     jest.useFakeTimers();

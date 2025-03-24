@@ -3,9 +3,9 @@ const { getCities, getCity, postCity, putCity, deleteCity } = require('../contro
 const router = express.Router();
 
 router.get('/cities', getCities);
-router.get('/cities/:city', getCity);
+router.get('/cities/:cityId', getCity);
 router.post('/cities', postCity);
-router.put('/cities/:city', putCity);
-router.delete('/cities/:city', deleteCity);
+router.put('/cities/:cityId', putCity);
+router.delete('/cities/:cityId', deleteCity);
 
 module.exports = router;

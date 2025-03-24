@@ -1,7 +1,7 @@
 const knex = require('knex');
 
-const { getYearsFromNow } = require('../dateUtils');
-const { getDensity } = require('../utils');
+const { getYearsFromNow } = require('../utils/dateUtils');
+const { getDensity } = require('../utils/cityUtils');
 const { config } = require('../config/configuration');
 
 // Configuración de la base de datos: tipo, ubicación y otros parámetros
@@ -23,8 +23,8 @@ const findCities = (async () => {
     return result;
 });
 
-const findCity = (async (name) => {
-    const result = await db('cities').select('*').where({name: name}).first();
+const findCity = (async (cityId) => {
+    const result = await db('cities').select('*').where({id: cityId}).first();
 
     return result;
 });
@@ -60,16 +60,17 @@ const registerCity = (async (name, population, altitude, foundationDate, area) =
     return result;
 });
 
-const modifyCity = (async (name, population, altitude) => {
+const modifyCity = (async (cityId, name, population, altitude) => {
     // TODO Modificar el resto de campos
-    await db('cities').where({ name: name }).update({
+    return await db('cities').where({ id: cityId }).update({
+        name: name,
         population: population,
         altitude: altitude
     });
 });
 
-const removeCity = (async (name) => {
-    await db('cities').del().where({name: name});
+const removeCity = (async (cityId) => {
+    return await db('cities').del().where({id: cityId});
 });
 
 module.exports = {
