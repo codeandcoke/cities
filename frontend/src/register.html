@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script type="module" src="register.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="index.html">Listado</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="register.html">Registro</a>
+                </li>
+            </ul>
+            
+            <h1>Registro ciudades</h1>
+            <form action="http://localhost:8080/cities">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Nombre</label>
+                    <input class="form-control" type="text" id="name"/>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Población</label>
+                    <input class="form-control" type="text" id="population"/>
+                </div>
+                <div class="mb-3">
+                    <label for="year" class="form-label">Area</label>
+                    <input class="form-control" type="text" id="area"/>
+                </div>
+                <button type="button" class="btn btn-primary" onClick="addCity()">Registrar</button>
+            </form>
+        </div>
+    </body>
+</html>

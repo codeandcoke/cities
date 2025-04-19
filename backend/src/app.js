@@ -3,10 +3,12 @@ const express = require('express');
 const cities = require('./route/cities');
 const { config } = require('./config/configuration');
 const promClient = require('prom-client');
+const cors = require('cors');
 const { httpRequestDurationSeconds, httpRequestsTotal, inFlightRequests } = require('./config/metrics');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Recoge métricas por defecto
 promClient.collectDefaultMetrics();

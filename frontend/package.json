@@ -1,0 +1,23 @@
+{
+    "name": "cities-frontend",
+    "version": "0.1",
+    "source": [
+        "src/index.html",
+        "src/register.html",
+        "src/modify.html"
+    ],
+    "type": "module",
+    "scripts": {
+        "start": "parcel --no-cache",
+        "build": "parcel build"
+    },
+    "devDependencies": {
+        "buffer": "^6.0.3",
+        "parcel": "latest",
+        "process": "^0.11.10"
+    },
+    "dependencies": {
+        "axios": "^1.7.7",
+        "toastify-js": "1.12.0"
+    }
+}

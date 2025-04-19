@@ -15,21 +15,19 @@ const getCity = (async (req, res) => {
     const cityId = parseInt(req.params.cityId);
 
     if (!Number.isInteger(cityId)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 'bad-request',
             message: 'cityId is not a valid number'
         });
-        return;
     }
 
     const city = await findCity(cityId);
 
     if (city === undefined) {
-        res.status(404).json({
+        return res.status(404).json({
             status: 'not-found',
             message: 'City not found'
         });
-        return;
     }
 
     res.status(200).json({
@@ -46,19 +44,17 @@ const getCity = (async (req, res) => {
 
 const postCity = (async (req, res) => {
     if (req.body.name === undefined || req.body.name === '') {
-        res.status(400).json({
+        return res.status(400).json({
             status: 'bad-request',
             message: 'name field is mandatory'
         });
-        return;
     }
 
     if (req.body.population <= 0) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 'bad-request',
             message: 'population must be greater than 0'
         });
-        return;
     }
     // TODO Añadir más validaciones (fecha, por ejemplo)
 
@@ -80,21 +76,19 @@ const putCity = (async (req, res) => {
     const cityId = parseInt(req.params.cityId);
     
     if (!Number.isInteger(cityId)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 'bad-request',
             message: 'cityId is not a valid number'
         });
-        return;
     }
 
     const modified = await modifyCity(cityId, req.body.name, req.body.population, req.body.altitude);
 
     if (!modified) {
-        res.status(404).json({
+        return res.status(404).json({
             status: 'not-found',
             message: 'city not found'
         });
-        return;
     }
 
     res.status(204).json({});
@@ -104,20 +98,18 @@ const deleteCity = (async (req, res) => {
     const cityId = parseInt(req.params.cityId);
 
     if (!Number.isInteger(cityId)) {
-        res.status(400).json({
+        return res.status(400).json({
             status: 'bad-request',
             message: 'cityId is not a valid number'
         });
-        return;
     }
 
     const removed = await removeCity(cityId);
     if (!removed) {
-        res.status(404).json({
+        return res.status(404).json({
             status: 'not-found',
             message: 'city not found'
         });
-        return;
     }
 
     res.status(204).json({});

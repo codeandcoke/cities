@@ -3,7 +3,7 @@ name: cities
 services:
   db:
     image: mariadb:11.3.2
-    container_name: cities-db-dev
+    container_name: cities-db
     environment:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
@@ -19,16 +19,22 @@ services:
     networks:
       - network1
   backend:
-    image: cities
+    image: cities-be
     container_name: cities-api
     ports:
       - "8080:8080"
     depends_on:
-      - db:
-          condition: service_healthy
+      db:
+        condition: service_healthy
     networks:
       - network1
-  # TODO Añadir el frontend
+  frontend:
+    image: cities-fe
+    container_name: cities-ui
+    ports:
+      - "1234:1234"
+    networks:
+      - network1
 networks:
   network1:
     driver: bridge
