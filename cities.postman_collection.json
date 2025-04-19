@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "def0ceb3-9597-4f31-bc0f-54f466157759",
+		"name": "cities",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "3720353"
+	},
+	"item": [
+		{
+			"name": "cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/cities"
+			},
+			"response": []
+		},
+		{
+			"name": "cities/:cityId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/cities/73"
+			},
+			"response": []
+		},
+		{
+			"name": "cities/:cityId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8080/cities/72"
+			},
+			"response": []
+		},
+		{
+			"name": "cities",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Zaragoza\",\n    \"foundationDate\": \"2000-10-10\",\n    \"population\": 1000,\n    \"area\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/cities"
+			},
+			"response": []
+		},
+		{
+			"name": "cities/:cityId",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Madrid\",\n    \"foundationDate\": \"2000-10-10\",\n    \"population\": 102200,\n    \"area\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/cities/71"
+			},
+			"response": []
+		}
+	]
+}
